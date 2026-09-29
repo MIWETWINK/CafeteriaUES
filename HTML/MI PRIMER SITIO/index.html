@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="mx">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundamentos de HTML - Párrafos</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+ 
+  <!--
+    Usamos <header> a nivel de <body> (no dentro de un <article>) porque
+    este encabezado aplica a toda la página, no solo a una sección.
+  -->
+  <header>
+    <h1>Fundamentos de HTML: Párrafos</h1>
+    <p>Los párrafos organizan el contenido textual de una página web de forma estructurada.</p>
+  </header>
+ 
+  <!--
+    No envolvemos el contenido en <article> porque esta página no es un
+    contenido "publicable" de forma independiente (como un post de blog);
+    es simplemente el cuerpo principal de la página, así que basta con <main>.
+  -->
+  <main>
+ 
+    <section>
+      <h2>¿Qué es un párrafo?</h2>
+      <p>La etiqueta <strong>&lt;p&gt;</strong> representa un párrafo de texto, es decir, una unidad independiente de contenido.</p>
+      <p>Usar párrafos ayuda a organizar el contenido y a aplicarle estilos con CSS.</p>
+    </section>
+ 
+    <section>
+      <h2>Ejemplo de varios párrafos</h2>
+      <p>Primer párrafo de ejemplo.</p>
+      <p>Segundo párrafo. Cada &lt;p&gt; se muestra en una línea nueva.</p>
+      <p>Tercer párrafo, para mantener el contenido ordenado.</p>
+    </section>
+ 
+    <section>
+      <h2>&lt;p&gt; vs &lt;br&gt;</h2>
+      <p>&lt;p&gt; inicia una nueva idea; &lt;br&gt; solo hace un salto de línea dentro del mismo párrafo.</p>
+      <!--
+        Aquí SÍ usamos <br> en vez de varios <p>, porque las tres líneas
+        (curso, tema, actividad) son parte de una misma idea/ficha de datos,
+        no párrafos independientes.
+      -->
+      <p>
+        Curso: DISEÑO WEB<br>
+        Tema: Párrafos<br>
+        Actividad: Práctica de HTML y CSS
+      </p>
+    </section>
+ 
+    <section>
+      <h2>Curso de Fundamentos de HTML</h2>
+      <p>Aprende a crear páginas web con HTML y a organizar el contenido con elementos semánticos.</p>
+      <p>
+        Nivel: Principiante<br>
+        Modalidad: Práctica<br>
+        Tema: Párrafos y texto
+      </p>
+      <!--
+        target="_blank" abre el enlace en una pestaña nueva para no sacar
+        al usuario de esta página.
+      -->
+      <p>Más info en la <a href="https://developer.mozilla.org/es/docs/Web/HTML" target="_blank">documentación de HTML</a></p>
+    </section>
+ 
+    <section>
+      <h2>Buenas prácticas</h2>
+      <p>Usa <strong>&lt;p&gt;</strong> para párrafos reales y separa ideas distintas en párrafos diferentes.</p>
+      <p>Usa <strong>&lt;br&gt;</strong> solo para saltos de línea puntuales, no para crear espacios grandes.</p>
+      <p>Controla la apariencia (colores, tamaños, márgenes) con <strong>CSS</strong>.</p>
+    </section>
+ 
+  </main>
+ 
+  <footer>
+    <p>Práctica de Fundamentos de HTML - Párrafos</p>
+  </footer>
+ 
+</body>
+</html>

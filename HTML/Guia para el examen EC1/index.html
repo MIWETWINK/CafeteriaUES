@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title> Café de origen Sonorense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --espresso:#241611;
+    --espresso-2:#2f1e17;
+    --parchment:#efe6d6;
+    --parchment-dim:#c9bda8;
+    --clay:#b5502b;
+    --clay-bright:#d1673e;
+    --olive:#7a8262;
+    --cream:#f8f2e6;
+    --line:rgba(239,230,214,0.14);
+    --shadow:rgba(0,0,0,0.35);
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *,*::before,*::after{box-sizing:inherit;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:76px}
+  body{
+    background:var(--espresso);
+    color:var(--parchment);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+  h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;color:var(--cream)}
+  .container-wide{max-width:1280px;margin:0 auto;padding:0 28px}
+ 
+  /* ---------- header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding-top:env(safe-area-inset-top,0px);
+    background:rgba(36,22,17,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;max-width:1120px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:1.25rem;color:var(--cream)}
+  .brand svg{width:26px;height:26px;flex-shrink:0}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a{font-size:0.94rem;color:var(--parchment-dim);transition:color .2s ease;position:relative}
+  .nav-links a:hover,.nav-links a:focus-visible{color:var(--cream)}
+  .nav-links a.active{color:var(--clay-bright)}
+  .nav-cta{
+    background:var(--clay);color:var(--cream);padding:10px 20px;border-radius:3px;
+    font-size:0.9rem;font-weight:500;transition:background .2s ease;
+  }
+  .nav-cta:hover{background:var(--clay-bright)}
+  .menu-btn{display:none;background:none;border:none;color:var(--cream);cursor:pointer;padding:6px}
+  .menu-btn svg{width:26px;height:26px}
+ 
+  /* ---------- hero ---------- */
+  .hero{
+    padding:168px 0 100px;
+    position:relative;
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;
+  }
+  .hero-eyebrow{color:var(--olive);font-size:0.95rem;margin-bottom:18px;font-family:'Fraunces',serif;font-style:italic}
+  .hero h1{
+    font-size:clamp(2.6rem,5vw,4.2rem);
+    line-height:1.04;
+    margin-bottom:26px;
+  }
+  .hero h1 em{color:var(--clay-bright);font-style:normal}
+  .hero p{max-width:46ch;color:var(--parchment-dim);font-size:1.08rem;margin-bottom:34px}
+  .btn-row{display:flex;gap:16px;flex-wrap:wrap}
+  .btn{
+    display:inline-block;padding:14px 28px;border-radius:3px;font-weight:500;font-size:0.98rem;
+    transition:transform .18s ease,background .18s ease,border-color .18s ease;
+  }
+  .btn-primary{background:var(--clay);color:var(--cream)}
+  .btn-primary:hover{background:var(--clay-bright);transform:translateY(-2px)}
+  .btn-ghost{border:1px solid var(--line);color:var(--parchment)}
+  .btn-ghost:hover{border-color:var(--parchment-dim);transform:translateY(-2px)}
+ 
+  .hero-visual{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
+  .bean-ring{position:absolute;inset:0;border:1px solid var(--line);border-radius:50%;animation:spin 40s linear infinite}
+  .bean-ring.inner{inset:14%;animation-duration:60s;animation-direction:reverse}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .bean-core{width:58%;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle at 32% 28%,#4a2c1d,#241611 72%);box-shadow:0 30px 60px var(--shadow),inset 0 0 0 1px var(--line)}
+  .hero-tag{
+    position:absolute;bottom:8%;left:2%;background:var(--cream);color:var(--espresso);
+    padding:12px 18px;border-radius:3px;font-size:0.85rem;font-weight:600;
+    box-shadow:0 14px 30px var(--shadow);
+  }
+  .hero-reveal{opacity:0;transform:translateY(18px);animation:reveal .8s ease forwards}
+  .hero-reveal:nth-child(2){animation-delay:.12s}
+  @keyframes reveal{to{opacity:1;transform:translateY(0)}}
+  @media (prefers-reduced-motion:reduce){
+    .bean-ring{animation:none}
+    .hero-reveal{animation:none;opacity:1;transform:none}
+  }
+ 
+  /* ---------- section basics ---------- */
+  section{padding:110px 0}
+  .section-head{max-width:640px;margin-bottom:64px}
+  .kicker{color:var(--olive);font-family:'Fraunces',serif;font-style:italic;font-size:0.95rem;margin-bottom:14px}
+  .section-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin-bottom:18px}
+  .section-head p{color:var(--parchment-dim);max-width:56ch}
+ 
+  /* ---------- origin ---------- */
+  .origin{background:var(--espresso-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .origin-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:64px;align-items:start}
+  .origin-figure{
+    aspect-ratio:4/5;border-radius:4px;
+    background:
+      radial-gradient(circle at 70% 20%,rgba(213,124,68,0.35),transparent 45%),
+      linear-gradient(155deg,#3a271d,#1c110c 80%);
+    position:relative;overflow:hidden;
+    box-shadow:0 30px 60px var(--shadow);
+  }
+  .origin-figure::after{
+    content:'';position:absolute;inset:0;
+    background-image:repeating-linear-gradient(115deg,rgba(239,230,214,0.05) 0 2px,transparent 2px 26px);
+  }
+  .origin-figure .loc{position:absolute;left:20px;bottom:20px;font-family:'Fraunces',serif;color:var(--cream);font-size:1.1rem}
+  .origin-figure .loc span{display:block;font-family:'Inter',sans-serif;color:var(--parchment-dim);font-size:0.82rem;margin-top:4px}
+  .origin-body p{color:var(--parchment-dim);margin-bottom:20px;max-width:60ch}
+  .origin-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px;border-top:1px solid var(--line);padding-top:32px}
+  .stat b{display:block;font-family:'Fraunces',serif;font-size:2rem;color:var(--clay-bright)}
+  .stat span{color:var(--parchment-dim);font-size:0.88rem}
+ 
+  /* ---------- process ---------- */
+  .process-list{border-top:1px solid var(--line)}
+  .process-item{
+    display:grid;grid-template-columns:90px 1fr 1fr;gap:32px;
+    padding:34px 0;border-bottom:1px solid var(--line);align-items:baseline;
+  }
+  .process-num{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--olive)}
+  .process-item h3{font-size:1.3rem;margin-bottom:6px}
+  .process-item p{color:var(--parchment-dim)}
+ 
+  /* ---------- products ---------- */
+  .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .product-card{
+    background:var(--espresso-2);border:1px solid var(--line);border-radius:4px;
+    padding:30px;display:flex;flex-direction:column;gap:16px;transition:border-color .2s ease;
+  }
+  .product-card:hover{border-color:var(--clay)}
+  .product-swatch{width:100%;aspect-ratio:16/10;border-radius:3px;position:relative;overflow:hidden}
+  .swatch-1{background:linear-gradient(160deg,#8a5a3a,#3a2114)}
+  .swatch-2{background:linear-gradient(160deg,#6c7a52,#2a2c1c)}
+  .swatch-3{background:linear-gradient(160deg,#a9552f,#241611)}
+  .product-card h3{font-size:1.25rem}
+  .product-meta{display:flex;justify-content:space-between;align-items:center;color:var(--parchment-dim);font-size:0.86rem;border-top:1px solid var(--line);padding-top:14px;margin-top:auto}
+  .price{color:var(--cream);font-weight:600;font-size:1.05rem}
+ 
+  /* ---------- pricing ---------- */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .plan{
+    border:1px solid var(--line);border-radius:4px;padding:36px 30px;
+    display:flex;flex-direction:column;gap:18px;position:relative;
+  }
+  .plan.featured{border-color:var(--clay);background:linear-gradient(180deg,rgba(181,80,43,0.08),transparent 60%)}
+  .plan-badge{
+    position:absolute;top:-13px;left:30px;background:var(--clay);color:var(--cream);
+    font-size:0.76rem;padding:5px 12px;border-radius:20px;font-weight:600;
+  }
+  .plan h3{font-size:1.2rem}
+  .plan .amount{font-family:'Fraunces',serif;font-size:2.3rem;color:var(--cream)}
+  .plan .amount span{font-family:'Inter',sans-serif;font-size:0.95rem;color:var(--parchment-dim)}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:10px;color:var(--parchment-dim);font-size:0.92rem}
+  .plan li{display:flex;gap:10px;align-items:flex-start}
+  .plan li svg{width:16px;height:16px;flex-shrink:0;margin-top:3px;color:var(--olive)}
+  .plan .btn{text-align:center;margin-top:auto}
+ 
+  /* ---------- testimonials ---------- */
+  .testimonials{background:var(--espresso-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .testi-card{padding:0;display:flex;flex-direction:column;gap:20px}
+  .testi-card p{color:var(--parchment);font-family:'Fraunces',serif;font-size:1.15rem;line-height:1.5}
+  .testi-who{display:flex;align-items:center;gap:12px;color:var(--parchment-dim);font-size:0.88rem}
+  .testi-mark{width:36px;height:36px;border-radius:50%;background:linear-gradient(160deg,var(--clay),#4a2c1d);flex-shrink:0}
+ 
+  /* ---------- press strip ---------- */
+  .press{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:44px 0}
+  .press-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:28px}
+  .press-label{color:var(--parchment-dim);font-size:0.85rem;white-space:nowrap}
+  .press-marks{display:flex;gap:44px;flex-wrap:wrap}
+  .press-mark{font-family:'Fraunces',serif;font-size:1.1rem;color:var(--parchment-dim);opacity:0.75;letter-spacing:0.01em}
+ 
+  /* ---------- equipo ---------- */
+  .gear-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .gear-card{
+    border:1px solid var(--line);border-radius:4px;padding:26px;
+    display:flex;flex-direction:column;gap:14px;transition:border-color .2s ease;
+  }
+  .gear-card:hover{border-color:var(--olive)}
+  .gear-icon{
+    width:52px;height:52px;border-radius:50%;background:var(--espresso-2);
+    display:flex;align-items:center;justify-content:center;border:1px solid var(--line);
+  }
+  .gear-icon svg{width:24px;height:24px;color:var(--clay-bright)}
+  .gear-card h3{font-size:1.1rem}
+  .gear-card p{color:var(--parchment-dim);font-size:0.9rem}
+  .gear-price{color:var(--cream);font-weight:600;font-size:0.95rem;margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
+ 
+  /* ---------- faq ---------- */
+  .faq-list{border-top:1px solid var(--line);max-width:760px}
+  .faq-item{border-bottom:1px solid var(--line)}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;color:var(--cream);
+    font-family:'Fraunces',serif;font-size:1.1rem;padding:24px 0;cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;gap:20px;
+  }
+  .faq-q:hover{color:var(--clay-bright)}
+  .faq-q .plus{
+    flex-shrink:0;width:22px;height:22px;position:relative;
+  }
+  .faq-q .plus::before,.faq-q .plus::after{
+    content:'';position:absolute;background:currentColor;top:50%;left:50%;
+    transform:translate(-50%,-50%);transition:transform .25s ease;
+  }
+  .faq-q .plus::before{width:14px;height:1.5px}
+  .faq-q .plus::after{width:1.5px;height:14px}
+  .faq-item.open .plus::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .faq-a p{color:var(--parchment-dim);padding-bottom:24px;max-width:60ch}
+  @media (prefers-reduced-motion:reduce){
+    .faq-a{transition:none}
+    .faq-q .plus::before,.faq-q .plus::after{transition:none}
+  }
+ 
+  /* ---------- newsletter ---------- */
+  .newsletter{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .newsletter h2{font-size:clamp(1.9rem,3.2vw,2.5rem);margin-bottom:16px}
+  .newsletter p{color:var(--parchment-dim);max-width:48ch;margin-bottom:0}
+  .form-row{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+  .form-row input{
+    flex:1;min-width:220px;background:var(--espresso-2);border:1px solid var(--line);
+    color:var(--parchment);padding:14px 16px;border-radius:3px;font-family:'Inter',sans-serif;font-size:0.95rem;
+  }
+  .form-row input:focus-visible{outline:2px solid var(--clay-bright);outline-offset:2px}
+  .form-note{font-size:0.82rem;color:var(--parchment-dim);margin-top:12px;min-height:20px}
+  .form-note.ok{color:var(--olive)}
+  .form-note.err{color:var(--clay-bright)}
+ 
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding:56px 0 40px}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+  .footer-brand{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--cream);margin-bottom:14px}
+  .footer-grid p{color:var(--parchment-dim);font-size:0.9rem;max-width:34ch}
+  .footer-col h4{font-family:'Inter',sans-serif;font-weight:600;color:var(--cream);font-size:0.9rem;margin-bottom:14px}
+  .footer-col a{display:block;color:var(--parchment-dim);font-size:0.9rem;margin-bottom:10px;transition:color .2s ease}
+  .footer-col a:hover{color:var(--cream)}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:26px;color:var(--parchment-dim);font-size:0.82rem;flex-wrap:wrap;gap:12px}
+ 
+  /* ---------- responsive ---------- */
+  @media (max-width:880px){
+    .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);
+      background:var(--espresso-2);flex-direction:column;justify-content:flex-start;
+      padding:100px 32px 32px;gap:26px;transform:translateX(100%);transition:transform .3s ease;
+      border-left:1px solid var(--line);
+    }
+    .nav-links.open{transform:translateX(0)}
+    .menu-btn{display:block}
+    .hero,.origin-grid,.newsletter{grid-template-columns:1fr}
+    .hero-visual{order:-1;max-width:340px;margin:0 auto}
+    .products-grid,.pricing-grid,.testi-grid,.gear-grid{grid-template-columns:1fr}
+    .press-row{flex-direction:column;align-items:flex-start}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .process-item{grid-template-columns:1fr;gap:8px}
+    .origin-stats{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+ 
+<header>
+  <nav class="nav">
+    <a href="#top" class="brand">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 8h13a3 3 0 0 1 0 6h-1M4 8v8a4 4 0 0 0 4 4h5a4 4 0 0 0 4-4v-2M4 8a2 2 0 0 1 2-2h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      Terreno
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#origen">Origen</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#cafes">Cafés</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#planes">Planes</a>
+      <a href="#contacto" class="nav-cta">Suscribirme</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </nav>
+</header>
+ 
+<main id="top">
+ 
+  <!-- HERO -->
+  <div class="wrap hero">
+    <div>
+      <p class="hero-eyebrow hero-reveal">Tostado en lotes de 12kg — Hermosillo</p>
+      <h1 class="hero-reveal">El café <em>El Terreno</em>.</h1>
+      <p class="hero-reveal">Compramos directo a 9 fincas en Sonora, Sinaloa y Chihuahua, tostamos cada lote esta semana y lo enviamos antes de los 10 días de reposo. Nada de inventario viejo, nada de mezclas que escondan el origen.</p>
+      <div class="btn-row hero-reveal">
+        <a href="#planes" class="btn btn-primary">Ver planes de suscripción</a>
+        <a href="#origen" class="btn btn-ghost">Conocer el origen</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="bean-ring"></div>
+      <div class="bean-ring inner"></div>
+      <div class="bean-core"></div>
+      <div class="hero-tag">Lote actual: Cascada Seca, Sonora</div>
+    </div>
+  </div>
+ 
+  <!-- PRENSA -->
+  <section class="press">
+    <div class="wrap press-row">
+      <span class="press-label">Mencionado en Insurgentes</span>
+      <div class="press-marks">
+        <span class="press-mark">Gula</span>
+        <span class="press-mark">Norteño</span>
+        <span class="press-mark">Café Hoy</span>
+        <span class="press-mark">Radio Fórmula</span>
+        <span class="press-mark">Time Out HMO</span>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ORIGEN -->
+  <section class="origin" id="origen">
+    <div class="wrap origin-grid">
+      <div class="origin-figure">
+        <div class="loc">Finca Irlanda<span>1,200 msnm — Tapachula, Chiapas</span></div>
+      </div>
+      <div class="origin-body">
+        <p class="kicker">De dónde viene</p>
+        <h2>Trabajamos con las mismas familias desde 2016</h2>
+        <p>Cada finca en nuestro catálogo la visitamos al menos una vez al año. No compramos por intermediarios: negociamos el precio directo con quien cosecha, y ese precio queda fijo antes de la cosecha, sin importar cómo se mueva el mercado de futuros.</p>
+        <p>Eso significa lotes más pequeños, trazabilidad real hasta el lote de proceso, y un café que cambia de perfil con las estaciones — porque así es el café de verdad.</p>
+        <div class="origin-stats">
+          <div class="stat"><b>9</b><span>fincas socias activas</span></div>
+          <div class="stat"><b>31%</b><span>por encima del precio de bolsa</span></div>
+          <div class="stat"><b>8 días</b><span>promedio de finca a tueste</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- PROCESO -->
+  <section id="proceso">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Cómo tostamos</p>
+        <h2>Cuatro pasos, sin atajos</h2>
+        <p>El mismo lote pasa por estas etapas cada semana, con notas de catación registradas en cada tanda para ajustar la curva de tueste al perfil de la finca.</p>
+      </div>
+      <div class="process-list">
+        <div class="process-item">
+          <span class="process-num">01</span>
+          <h3>Cata en verde</h3>
+          <p>Evaluamos humedad, densidad y defectos del lote antes de aceptar la compra; rechazamos alrededor de un 12% de las muestras que nos ofrecen.</p>
+        </div>
+        <div class="process-item">
+          <span class="process-num">02</span>
+          <h3>Perfil de tueste</h3>
+          <p>Diseñamos una curva específica según el proceso del grano — lavado, honey o natural — buscando resaltar el dulzor sin quemar la acidez.</p>
+        </div>
+        <div class="process-item">
+          <span class="process-num">03</span>
+          <h3>Reposo controlado</h3>
+          <p>Dejamos reposar el grano entre 5 y 10 días tras el tueste; es el punto donde el café suelta el CO2 y el sabor se estabiliza.</p>
+        </div>
+        <div class="process-item">
+          <span class="process-num">04</span>
+          <h3>Empaque y envío</h3>
+          <p>Empacamos con válvula unidireccional el mismo día del envío, con la fecha de tueste impresa — no una fecha de caducidad genérica.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- PRODUCTOS -->
+  <section id="cafes" style="background:var(--espresso-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">La selección actual</p>
+        <h2>Tres orígenes, tres personalidades</h2>
+        <p>Rotamos el catálogo según temporada de cosecha; esto es lo que estamos tostando esta semana.</p>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-swatch swatch-1"></div>
+          <h3>Finca Irlanda</h3>
+          <p style="color:var(--parchment-dim);font-size:0.92rem">Chiapas · Lavado · Notas a ciruela, panela y té negro.</p>
+          <div class="product-meta"><span>250g</span><span class="price">$285 MXN</span></div>
+        </div>
+        <div class="product-card">
+          <div class="product-swatch swatch-2"></div>
+          <h3>La Providencia</h3>
+          <p style="color:var(--parchment-dim);font-size:0.92rem">Oaxaca · Honey · Notas a mango, miel de agave y nuez.</p>
+          <div class="product-meta"><span>250g</span><span class="price">$310 MXN</span></div>
+        </div>
+        <div class="product-card">
+          <div class="product-swatch swatch-3"></div>
+          <h3>El Mirador</h3>
+          <p style="color:var(--parchment-dim);font-size:0.92rem">Veracruz · Natural · Notas a fresa, chocolate de metate.</p>
+          <div class="product-meta"><span>250g</span><span class="price">$295 MXN</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- EQUIPO -->
+  <section id="equipo">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Para preparar en casa</p>
+        <h2>El grano es la mitad de la taza</h2>
+        <p>Equipo que probamos nosotros mismos antes de venderlo; si no lo usaríamos en la barra de catación, no lo ofrecemos.</p>
+      </div>
+      <div class="gear-grid">
+        <div class="gear-card">
+          <div class="gear-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6 3h12l-2 12H8L6 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 15v3a3 3 0 0 0 6 0v-3" stroke="currentColor" stroke-width="1.4"/></svg>
+          </div>
+          <h3>V60 cerámica</h3>
+          <p>Extracción limpia y brillante; ideal para resaltar los cafés lavados de nuestro catálogo.</p>
+          <div class="gear-price">$420 MXN</div>
+        </div>
+        <div class="gear-card">
+          <div class="gear-icon">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Báscula con temporizador</h3>
+          <p>Precisión de 0.1g para mantener tu proporción de café y agua consistente en cada preparación.</p>
+          <div class="gear-price">$690 MXN</div>
+        </div>
+        <div class="gear-card">
+          <div class="gear-icon">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="16" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M9 9h6M9 13h6M9 17h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Molino manual cónico</h3>
+          <p>Muelas de acero para una molienda pareja; recomendado si aún no tienes molino en casa.</p>
+          <div class="gear-price">$1,150 MXN</div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- PLANES -->
+  <section id="planes">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Suscripción</p>
+        <h2>Café fresco, en el ritmo que tomas</h2>
+        <p>Ajustas cantidad, molienda y frecuencia cuando quieras; pausas o cancelas desde tu cuenta sin llamadas ni penalización.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="plan">
+          <h3>Curioso</h3>
+          <div class="amount">$260<span>/mes</span></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2"/></svg>1 bolsa de 250g al mes</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2"/></svg>Un solo origen fijo</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2"/></svg>Molienda a elegir</li>
+          </ul>
+          <a href="#contacto" class="btn btn-ghost">Elegir plan</a>
+        </div>
+        <div class="plan featured">
+          <span class="plan-badge">Más elegido</span>
+          <h3>Explorador</h3>
+          <div class="amount">$470<span>/mes</span></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2"/></svg>2 bolsas de 250g, orígenes rotativos</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2"/></svg>Ficha de catación por lote</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2"/></svg>Envío prioritario</li>
+          </ul>
+          <a href="#contacto" class="btn btn-primary">Elegir plan</a>
+        </div>
+        <div class="plan">
+          <h3>Tueste privado</h3>
+          <div class="amount">$890<span>/mes</span></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2"/></svg>4 bolsas de 250g</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2"/></svg>Perfil de tueste a tu gusto</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2"/></svg>Videollamada de catación al mes</li>
+          </ul>
+          <a href="#contacto" class="btn btn-ghost">Elegir plan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- TESTIMONIOS -->
+  <section class="testimonials">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Quien ya lo toma</p>
+        <h2>Lo que dicen quienes tuestan con nosotros cada mes</h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <p>"Es el primer café de suscripción donde realmente noto la diferencia entre un lote y otro. Cambia con la cosecha, y se siente."</p>
+          <div class="testi-who"><div class="testi-mark"></div>Renata Off, Roma Norte</div>
+        </div>
+        <div class="testi-card">
+          <p>"La ficha de catación que mandan con cada bolsa me enseñó a describir sabores que ni sabía que estaba probando."</p>
+          <div class="testi-who"><div class="testi-mark"></div>Iker Salcido, Monterrey</div>
+        </div>
+        <div class="testi-card">
+          <p>"Cancelé mi suscripción con otra marca por esta. La fecha de tueste real hace toda la diferencia en la taza."</p>
+          <div class="testi-who"><div class="testi-mark"></div>Paola Grijalva, Guadalajara</div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- PREGUNTAS FRECUENTES -->
+  <section id="preguntas">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Dudas frecuentes</p>
+        <h2>Antes de que preguntes</h2>
+      </div>
+      <div class="faq-list" id="faqList">
+        <div class="faq-item open">
+          <button class="faq-q" aria-expanded="true">¿Con qué frecuencia tuestan?<span class="plus"></span></button>
+          <div class="faq-a"><p>Tostamos todos los martes y jueves. Tu bolsa se empaca el mismo día del tueste o al día siguiente, nunca antes de eso.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">¿Puedo elegir la molienda?<span class="plus"></span></button>
+          <div class="faq-a"><p>Sí. En cada pedido puedes elegir entre grano entero, filtro, espresso o prensa francesa; ajustamos el molino justo antes de empacar.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">¿Cómo cancelo o pauso mi suscripción?<span class="plus"></span></button>
+          <div class="faq-a"><p>Desde tu cuenta, en cualquier momento, sin costo ni penalización. Los cambios aplican a partir del siguiente ciclo de envío.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">¿Envían fuera de la Ciudad de México?<span class="plus"></span></button>
+          <div class="faq-a"><p>Sí, a todo México. El envío estándar tarda de 2 a 4 días hábiles; el plan Explorador incluye envío prioritario de 1 a 2 días.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">¿Qué pasa si un lote se agota?<span class="plus"></span></button>
+          <div class="faq-a"><p>Te avisamos por correo y sustituimos por un origen de perfil similar de nuestro catálogo actual, nunca con un café genérico de relleno.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- NEWSLETTER -->
+  <section id="contacto">
+    <div class="wrap newsletter">
+      <div>
+        <h2>Entérate cuando llega un lote nuevo</h2>
+        <p>Te avisamos por correo cuando tostamos una finca nueva, antes de que se agote. Sin spam, uno o dos correos al mes.</p>
+      </div>
+      <form id="signupForm" novalidate>
+        <div class="form-row">
+          <input type="email" id="emailInput" placeholder="tu@correo.com" autocomplete="email" required>
+          <button type="submit" class="btn btn-primary">Avísenme</button>
+        </div>
+        <p class="form-note" id="formNote"></p>
+      </form>
+    </div>
+  </section>
+ 
+</main>
+ 
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Terreno</div>
+        <p>Tostaduría de café de especialidad. Compra directa, lotes trazables, tueste semanal desde Ciudad de México.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Tienda</h4>
+        <a href="#cafes">Cafés actuales</a>
+        <a href="#planes">Suscripciones</a>
+        <a href="#">Equipo de preparación</a>
+      </div>
+      <div class="footer-col">
+        <h4>Compañía</h4>
+        <a href="#origen">Nuestro origen</a>
+        <a href="#proceso">Proceso de tueste</a>
+        <a href="#">Trabaja con nosotros</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ayuda</h4>
+        <a href="#">Preguntas frecuentes</a>
+        <a href="#">Envíos</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Terreno Café. Todos los derechos reservados.</span>
+      <span>Ciudad de México, México</span>
+    </div>
+  </div>
+</footer>
+ 
+<script>
+(function(){
+  "use strict";
+ 
+  // ---- Mobile menu toggle ----
+  var menuBtn = document.getElementById('menuBtn');
+  var navLinks = document.getElementById('navLinks');
+ 
+  function closeMenu(){
+    navLinks.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded','false');
+  }
+  function toggleMenu(){
+    var isOpen = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+  menuBtn.addEventListener('click', toggleMenu);
+ 
+  navLinks.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', closeMenu);
+  });
+ 
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeMenu();
+  });
+ 
+  // ---- Active nav link on scroll ----
+  var sections = ['origen','proceso','cafes','equipo','planes','preguntas','contacto']
+    .map(function(id){ return document.getElementById(id); })
+    .filter(Boolean);
+  var navAnchors = Array.prototype.slice.call(navLinks.querySelectorAll('a[href^="#"]'));
+ 
+  function setActive(){
+    var scrollPos = window.scrollY + 120;
+    var currentId = null;
+    sections.forEach(function(sec){
+      if(sec.offsetTop <= scrollPos){
+        currentId = sec.id;
+      }
+    });
+    navAnchors.forEach(function(a){
+      var href = a.getAttribute('href').replace('#','');
+      if(href === currentId){
+        a.classList.add('active');
+      } else {
+        a.classList.remove('active');
+      }
+    });
+  }
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+ 
+  // ---- FAQ accordion ----
+  var faqItems = Array.prototype.slice.call(document.querySelectorAll('.faq-item'));
+ 
+  function setFaqHeight(item){
+    var answer = item.querySelector('.faq-a');
+    if(item.classList.contains('open')){
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    } else {
+      answer.style.maxHeight = '0px';
+    }
+  }
+ 
+  faqItems.forEach(function(item){
+    var btn = item.querySelector('.faq-q');
+    setFaqHeight(item);
+    btn.addEventListener('click', function(){
+      var willOpen = !item.classList.contains('open');
+      // close the others for a single, orchestrated accordion
+      faqItems.forEach(function(other){
+        other.classList.remove('open');
+        other.querySelector('.faq-q').setAttribute('aria-expanded','false');
+        setFaqHeight(other);
+      });
+      if(willOpen){
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+        setFaqHeight(item);
+      }
+    });
+  });
+ 
+  window.addEventListener('resize', function(){
+    faqItems.forEach(setFaqHeight);
+  });
+ 
+  // ---- Newsletter form validation (client-side only, no backend) ----
+  var form = document.getElementById('signupForm');
+  var emailInput = document.getElementById('emailInput');
+  var formNote = document.getElementById('formNote');
+  var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+ 
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var value = emailInput.value.trim();
+ 
+    if(value === ''){
+      formNote.textContent = 'Escribe tu correo para poder avisarte.';
+      formNote.className = 'form-note err';
+      emailInput.focus();
+      return;
+    }
+    if(!emailPattern.test(value)){
+      formNote.textContent = 'Ese correo no se ve válido. Revisa el formato.';
+      formNote.className = 'form-note err';
+      emailInput.focus();
+      return;
+    }
+ 
+    formNote.textContent = 'Listo — te avisaremos cuando llegue el siguiente lote.';
+    formNote.className = 'form-note ok';
+    form.reset();
+  });
+ 
+  emailInput.addEventListener('input', function(){
+    if(formNote.classList.contains('err')){
+      formNote.textContent = '';
+      formNote.className = 'form-note';
+    }
+  });
+ 
+})();
+</script>
+ 
+</body>
+</html>
+ 

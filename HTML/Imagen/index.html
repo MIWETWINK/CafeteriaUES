@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagenes en html</title>
+</head>
+<body>
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0%;
+        padding: 30px;
+    }
+    .catalogo{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    .tarjeta{
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    .tarjeta img{
+        display: block;
+        width: 100%;
+        height: 230px;
+        object-fit: cover;
+    }
+    .contenido{
+        padding: 20px;
+    }
+    </style>
+<h1>Computadoras para desarrollo Web</h1>
+    
+    <section class="catalogo">
+        <article class="tarjeta">
+            <a href="https://www.pcresumen.com/">
+            <img 
+                    src="https://images.pexels.com/photos/5474290/pexels-photo-5474290.jpeg?gl=1&ahormm=_gaMTASNZU00TYUOS4xWlZUYmJtU3DUw" 
+                    alt="Computadora para desarrollo web" 
+                    width="350" 
+                    loading="lazy"
+                    title="Laptop Profesional">
+            </a>
+            <div class="contenido">
+                <h2>Laptop Profesional</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam iusto expedita mollitia laborum optio omnis cupiditate quis...</p>
+            </div>
+        </article>
+
+        <article class="tarjeta">
+            <img 
+                    src="https://images.pexels.com/photos/5861325/pexels-photo-5861325.jpeg?gl=1&td0jio=_gaMTASNZU00TYUOS4xWlZUYmJtU3DUw" 
+                    alt="Estación de trabajo con dos monitores" 
+                    width="350" 
+                    loading="lazy"
+                    title="Estación de trabajo con dos monitores">
+                <h2>Estación de trabajo con dos monitores</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam iusto expedita mollitia laborum optio omnis cupiditate quis...</p>
+            </div>
+        </article>
+    </section>
+
+</body>
+</html>

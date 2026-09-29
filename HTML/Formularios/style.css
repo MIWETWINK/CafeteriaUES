@@ -1,0 +1,61 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+main{
+    padding: 2rem 1rem;
+}
+
+.formulario{
+    width: min(100%,42rem);
+    margin-inline: auto;
+}
+
+fieldset{
+    display: grid;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid #0e0d0d;
+    border-radius: 0.5rem;
+}
+
+.campo{
+    display: grid;
+    gap: 0.5rem;
+}
+
+label{
+    font-weight: 600;
+}
+
+input, textarea, button{
+    font: inherit;
+}
+
+input, textarea{
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #000000;
+    border-radius: 0.35rem;
+}
+
+textarea{
+    resize: vertical;
+}
+
+input:focus, textarea:focus-visible, button:focus-visible{
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+}
+
+button{
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+}

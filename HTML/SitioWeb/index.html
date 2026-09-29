@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria de la UES</title>
+</head>
+<body>
+     <!-- ENCABEZADO Y NAVEGACIÓN PRINCIPAL -->
+  <header>
+    <h1>Cafeteria UES</h1>
+    <nav>
+      <a href="#menu">Menú</a>
+      <a href="#pedir">Como pedir</a>
+      <a href="#Datos">Datos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+ 
+  <main>
+    <section>
+      <h2>Bienvenido</h2>
+      <p>Comida todos los días.</p>
+    </section>
+ 
+    <section id="menu">
+      <h2>Menú</h2>
+      <table>
+        <caption>Bebidas y alimentos</caption>
+        <thead>
+          <tr><th>Producto</th><th>Categoría</th><th>Precio</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Espresso</td><td>Café caliente</td><td>$35</td></tr>
+          <tr><td>Capuchino</td><td>Café caliente</td><td>$55</td></tr>
+          <tr><td>Sandwich de pollo</td><td>Postres</td><td>$60</td></tr>
+          <tr><td>Croissant</td><td>Panadería</td><td>$45</td></tr>
+        </tbody>
+      </table>
+    </section>
+ 
+    <section id="pedir">
+      <h2>Como pedir</h2>
+      <ol>
+        <li>Elige tu bebida</li>
+        <li>Pídela en la barra</li>
+        <li>Paga en caja</li>
+        <li>Recoge tu pedido</li>
+      </ol>
+ 
+      <h3>Qué ofrecemos</h3>
+      <ul>
+        <li>Café de especialidad</li>
+        <li>Wi-Fi gratis</li>
+        <li>Sandwiches :)</li>
+      </ul>
+ 
+      <h3>Glosario</h3>
+      <dl>
+        <dt>Espresso</dt>
+        <dd>Café concentrado hecho con agua a presión</dd>
+        <dt>Cold brew</dt>
+        <dd>Café preparado en agua fría durante muchas horas</dd>
+      </dl>
+    </section>
+ 
+    
+    <section id="Datos">
+      <h2>Datos</h2>
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Tus datos</legend>
+          <p><label for="nombre">Nombre:</label>
+             <input type="text" id="nombre" name="nombre" required></p>
+          <p><label for="correo">Correo:</label>
+             <input type="email" id="correo" name="correo" required></p>
+          <p><label for="telefono">Teléfono:</label>
+             <input type="tel" id="telefono" name="telefono"></p>
+        </fieldset>
+ 
+        <fieldset>
+          <legend>Comentarios</legend>
+          <p><label for="comentarios">Comentarios:</label><br>
+             <textarea id="comentarios" name="comentarios" rows="3" cols="40"></textarea></p>
+        </fieldset>
+ 
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+ 
+  <footer id="contacto">
+    <h2>Contacto</h2>
+    <address>
+      Av. Ley Federal del Trabajo, Sin Asignación En Nombre de Asentamiento, 83100 Hermosillo, Son<br>
+      Tel: <a href="tel:+526621234567">662 123 6767</a><br>
+      <a href="mailto:hola@cafebrasa.mx">andres@cafeues.mx</a>
+    </address>
+    <p><small>&copy; 2026 Cafeteria UES</small></p>
+  </footer>
+ 
+</body>
+</html>
